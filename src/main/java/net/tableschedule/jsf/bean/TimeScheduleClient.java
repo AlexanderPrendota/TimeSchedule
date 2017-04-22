@@ -27,6 +27,8 @@ public class TimeScheduleClient {
 
     public List<TimeSchedule> timeSchedules;
 
+    private MQListener mqListener;
+
     @SuppressWarnings({"unchecked", "unused"})
     public void getContent() throws Exception{
 

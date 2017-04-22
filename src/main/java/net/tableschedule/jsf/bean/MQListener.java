@@ -12,11 +12,11 @@ import java.io.IOException;
 /**
  * Created by aleksandrprendota on 21.04.17.
  */
-@SessionScoped
+
 @AllArgsConstructor
-@ManagedBean(name = "mqlistener", eager = true)
 public class MQListener {
     private final static String QUEUE_NAME = "mylittlequeue";
+
 
     public void startListener() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -39,11 +39,11 @@ public class MQListener {
                     // ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 
                     // 2 way:
-                    //Ajax.update(":maintable");
+                    Ajax.update(":maintable");
 
                     // another way
-                    String page = "home.xhtml";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(page);
+//                    String page = "home.xhtml";
+//                    FacesContext.getCurrentInstance().getExternalContext().redirect(page);
                 }
             }
         };

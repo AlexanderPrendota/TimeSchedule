@@ -4,27 +4,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>Shedule</title>
-</h:head>
-<h:body id="maintable">
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{schedule.getContent}" />
-        <f:event type="preRenderView" listener="#{mqlistener.startListener}" />
-    </f:metadata>
-    <h3>TimeTable</h3>
+    <h:head>
+        <title>Shedule</title>
+        <link type="text/css" rel="stylesheet" href="resource/css/style.css" />
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
+    </h:head>
+    <h:body id="maintable">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{schedule.getContent}" />
+        </f:metadata>
+        <h1>TimeTable</h1>
+        <h3>Justrailways</h3>
 
-    <h:outputText value="#{session.lastAccessedTime}">
-        <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" type="date" />
-    </h:outputText>
+        <h:outputText value="#{session.lastAccessedTime}">
+            <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" type="date" />
+        </h:outputText>
 
-    <b:dataTable value="#{schedule.timeSchedules}" var="time">
-        <b:dataTableColumn value="#{time.train}" />
-        <b:dataTableColumn value="#{time.stationDeparture}" />
-        <b:dataTableColumn value="#{time.timeDeparture}" />
-        <b:dataTableColumn value="#{time.stationArrival}"/>
-        <b:dataTableColumn value="#{time.timeArrival}"  />
-    </b:dataTable>
+        <b:dataTable id="schedules" value="#{schedule.timeSchedules}" var="time">
+            <b:dataTableColumn value="#{time.train}" />
+            <b:dataTableColumn value="#{time.stationDeparture}" />
+            <b:dataTableColumn value="#{time.timeDeparture}" />
+            <b:dataTableColumn value="#{time.stationArrival}"/>
+            <b:dataTableColumn value="#{time.timeArrival}"  />
+        </b:dataTable>
 
-</h:body>
+        <h:graphicImage id="fon" value="resource/images/Landscape.png" />
+
+    </h:body>
 </html>
