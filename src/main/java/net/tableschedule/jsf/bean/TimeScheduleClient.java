@@ -27,31 +27,6 @@ public class TimeScheduleClient {
 
     public List<TimeSchedule> timeSchedules;
 
-    private MQListener mqListener;
-
-    @SuppressWarnings({"unchecked", "unused"})
-    public void getContent() throws Exception{
-
-
-        Client client = Client.create();
-        WebResource webResource = client.resource("http://localhost:8080/schedule/todays");
-        ObjectMapper mapper = new ObjectMapper();
-        ClientResponse response = webResource
-                .accept(MediaType.APPLICATION_JSON)
-                .get(ClientResponse.class);
-        if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
-        }
-        String output = response.getEntity(String.class);
-
-        try {
-            timeSchedules = mapper.readValue(output, List.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<TimeSchedule> getTimeSchedules(){
         return timeSchedules;
     }
