@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Shedule</title>
+</h:head>
+<h:body id="maintable">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{schedule.getContent}" />
+        <f:event type="preRenderView" listener="#{mqlistener.startListener}" />
+    </f:metadata>
+    <h3>TimeTable</h3>
+
+    <h:outputText value="#{session.lastAccessedTime}">
+        <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" type="date" />
+    </h:outputText>
+
+    <b:dataTable value="#{schedule.timeSchedules}" var="time">
+        <b:dataTableColumn value="#{time.train}" />
+        <b:dataTableColumn value="#{time.stationDeparture}" />
+        <b:dataTableColumn value="#{time.timeDeparture}" />
+        <b:dataTableColumn value="#{time.stationArrival}"/>
+        <b:dataTableColumn value="#{time.timeArrival}"  />
+    </b:dataTable>
+
+</h:body>
+</html>
