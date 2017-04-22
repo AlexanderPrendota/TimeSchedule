@@ -8,18 +8,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by aleksandrprendota on 21.04.17.
  */
 
 @AllArgsConstructor
-public class MQListener {
+public class MQListener{
 
     private final static String QUEUE_NAME = "mylittlequeue";
 
 
-    public void startListener() throws Exception {
+    public void startListener() throws Exception{
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
@@ -35,6 +36,8 @@ public class MQListener {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] Received '" + message + "'");
                 if (message.contains("update")){
+                     TimeScheduleService timeScheduleService = new TimeScheduleService();
+                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
 
                     // 1 way:
                     // ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -50,9 +53,5 @@ public class MQListener {
             }
         };
         channel.basicConsume(QUEUE_NAME, true, consumer);
-    }
-
-    public void restart(){
-
     }
 }

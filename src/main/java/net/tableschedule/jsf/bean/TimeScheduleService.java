@@ -5,7 +5,12 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import lombok.NoArgsConstructor;
+import net.bootsfaces.render.E;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +20,8 @@ import java.util.List;
  * Created by aleksandrprendota on 22.04.17.
  */
 @NoArgsConstructor
-public class TimeScheduleService {
+@ManagedBean(name = "scheduleservice", eager = true)
+public class TimeScheduleService implements ServletContextListener {
 
     @SuppressWarnings({"unchecked", "unused"})
     public List<TimeSchedule> getContent(){
@@ -39,4 +45,26 @@ public class TimeScheduleService {
         }
         return timeSchedules;
     }
+
+    public void runListener() throws Exception{
+        MQListener mqListener = new MQListener();
+        mqListener.startListener();
+    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent){
+        try{
+            MQListener mqListener = new MQListener();
+            mqListener.startListener();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
+    }
+
 }

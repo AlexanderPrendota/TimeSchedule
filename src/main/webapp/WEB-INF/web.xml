@@ -36,4 +36,8 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>net.tableschedule.jsf.bean.TimeScheduleService</listener-class>
+    </listener>
+
 </web-app>
