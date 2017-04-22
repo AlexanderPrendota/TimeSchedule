@@ -6,20 +6,18 @@
       xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Shedule</title>
-        <link type="text/css" rel="stylesheet" href="resource/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="resources/css/style.css" />
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
+        <h:outputScript name="js/updateTime.js"/>
     </h:head>
-    <h:body id="maintable">
+    <h:body id="maintable" onload="clockTick();">
         <f:metadata>
             <f:event type="preRenderView" listener="#{schedule.getContent}" />
         </f:metadata>
-        <h1>TimeTable</h1>
-        <h3>Justrailways</h3>
-
-        <h:outputText value="#{session.lastAccessedTime}">
-            <f:convertDateTime pattern="MM-dd-yyyy HH:mm:ss" type="date" />
-        </h:outputText>
+        <h1><a href="http://localhost:8080/">Justrailways</a></h1>
+        <h3>Time Table</h3>
+        <h4 id="date"></h4>
 
         <b:dataTable id="schedules" value="#{schedule.timeSchedules}" var="time">
             <b:dataTableColumn value="#{time.train}" />
@@ -29,7 +27,7 @@
             <b:dataTableColumn value="#{time.timeArrival}"  />
         </b:dataTable>
 
-        <h:graphicImage id="fon" value="resource/images/Landscape.png" />
+        <h:graphicImage id="fon" value="resources/images/Landscape.png" />
 
     </h:body>
 </html>
