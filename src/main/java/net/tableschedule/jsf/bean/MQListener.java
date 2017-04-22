@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @AllArgsConstructor
 public class MQListener {
+
     private final static String QUEUE_NAME = "mylittlequeue";
 
 
@@ -34,16 +35,17 @@ public class MQListener {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] Received '" + message + "'");
                 if (message.contains("update")){
+
                     // 1 way:
                     // ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                     // ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 
                     // 2 way:
-                    Ajax.update(":maintable");
+                    //Ajax.update(":maintable");
 
                     // another way
-//                    String page = "home.xhtml";
-//                    FacesContext.getCurrentInstance().getExternalContext().redirect(page);
+                    //String page = "home.xhtml";
+                    //FacesContext.getCurrentInstance().getExternalContext().redirect(page);
                 }
             }
         };

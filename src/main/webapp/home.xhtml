@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Shedule</title>
         <link type="text/css" rel="stylesheet" href="resources/css/style.css" />
@@ -12,9 +13,7 @@
         <h:outputScript name="js/updateTime.js"/>
     </h:head>
     <h:body id="maintable" onload="clockTick();">
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{schedule.getContent}" />
-        </f:metadata>
+
         <h1><a href="http://localhost:8080/">Justrailways</a></h1>
         <h3>Time Table</h3>
         <h4 id="date"></h4>

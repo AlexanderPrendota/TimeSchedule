@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import lombok.NoArgsConstructor;
 
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -13,10 +14,11 @@ import java.util.List;
 /**
  * Created by aleksandrprendota on 22.04.17.
  */
+@NoArgsConstructor
 public class TimeScheduleService {
 
     @SuppressWarnings({"unchecked", "unused"})
-    public List<TimeSchedule> getContent() throws Exception{
+    public List<TimeSchedule> getContent(){
 
         Client client = Client.create();
         WebResource webResource = client.resource("http://localhost:8080/schedule/todays");
