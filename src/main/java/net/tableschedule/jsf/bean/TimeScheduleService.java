@@ -5,10 +5,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import lombok.NoArgsConstructor;
-import net.bootsfaces.render.E;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.ws.rs.core.MediaType;
@@ -44,11 +41,6 @@ public class TimeScheduleService implements ServletContextListener {
             e.printStackTrace();
         }
         return timeSchedules;
-    }
-
-    public void runListener() throws Exception{
-        MQListener mqListener = new MQListener();
-        mqListener.startListener();
     }
 
     @Override

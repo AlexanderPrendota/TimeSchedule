@@ -2,25 +2,21 @@ package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
 import lombok.AllArgsConstructor;
-import org.omnifaces.util.Ajax;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 
 /**
  * Created by aleksandrprendota on 21.04.17.
  */
-
+@NoArgsConstructor
 @AllArgsConstructor
 public class MQListener{
 
     private final static String QUEUE_NAME = "mylittlequeue";
 
 
-    public void startListener() throws Exception{
+    public void startListener() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
@@ -38,6 +34,7 @@ public class MQListener{
                 if (message.contains("update")){
                      TimeScheduleService timeScheduleService = new TimeScheduleService();
                      List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
+                     TodaysTimeScheduleSingleton.getInstance().update(timeSchedules);
 
                     // 1 way:
                     // ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
