@@ -17,7 +17,6 @@ import java.util.List;
  * Created by aleksandrprendota on 22.04.17.
  */
 @NoArgsConstructor
-@ManagedBean(name = "scheduleservice", eager = true)
 public class TimeScheduleService implements ServletContextListener {
 
     @SuppressWarnings({"unchecked", "unused"})
@@ -51,7 +50,6 @@ public class TimeScheduleService implements ServletContextListener {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     @Override

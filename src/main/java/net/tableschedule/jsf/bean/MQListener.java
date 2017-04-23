@@ -1,7 +1,7 @@
 package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
-import lombok.AllArgsConstructor;
+
 import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,6 @@ import java.util.List;
  * Created by aleksandrprendota on 21.04.17.
  */
 @NoArgsConstructor
-@AllArgsConstructor
 public class MQListener{
 
     private final static String QUEUE_NAME = "mylittlequeue";
@@ -46,6 +45,7 @@ public class MQListener{
                     // another way
                     //String page = "home.xhtml";
                     //FacesContext.getCurrentInstance().getExternalContext().redirect(page);
+                    System.out.println("DONE MQ");
                 }
             }
         };
