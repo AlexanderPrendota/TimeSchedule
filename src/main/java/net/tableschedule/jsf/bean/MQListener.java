@@ -1,30 +1,23 @@
 package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
-import lombok.NoArgsConstructor;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 /**
- * Created by aleksandrprendota on 21.04.17.
+ * Created by aleksandrprendota on 26.04.17.
  */
-@NoArgsConstructor
-public class MQListener extends HttpServlet{
-
+public class MQListener {
     private final static String QUEUE_NAME = "mylittlequeue";
-    public static boolean UPDATE_FLAG = false;
-
+    public static volatile boolean UPDATE_FLAG = false;
+    private Channel channel;
 
     public void startListener() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
-        final Channel channel = connection.createChannel();
+        channel = connection.createChannel();
 
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
@@ -44,31 +37,7 @@ public class MQListener extends HttpServlet{
         channel.basicConsume(QUEUE_NAME, true, consumer);
     }
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        MQListener mqListener = new MQListener();
-        try{
-            mqListener.startListener();
-        }catch (Exception e){
-        }
+    public void close() throws IOException, TimeoutException {
+        channel.close();
     }
-
 }
-
-//                     TimeScheduleService timeScheduleService = new TimeScheduleService();
-//                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
-//                     TodaysTimeScheduleSingleton.getInstance().update(timeSchedules);
-
-// 1 way:
-// ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-// ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-
-// 2 way:
-//Ajax.update(":maintable");
-
-
-
-// another way
-//String page = "home.xhtml";
-//FacesContext.getCurrentInstance().getExternalContext().redirect(page);

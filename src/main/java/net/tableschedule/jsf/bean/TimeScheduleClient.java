@@ -1,6 +1,5 @@
 package net.tableschedule.jsf.bean;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +9,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.tableschedule.jsf.bean.MQListener.UPDATE_FLAG;
+
 
 /**
  * Created by aleksandrprendota on 18.04.17.
