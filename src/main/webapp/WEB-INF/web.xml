@@ -6,6 +6,7 @@
    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id = "WebApp_ID" version="2.5">
 
+
     <welcome-file-list>
         <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
@@ -36,8 +37,6 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>net.tableschedule.jsf.bean.TimeScheduleService</listener-class>
-    </listener>
+
 
 </web-app>

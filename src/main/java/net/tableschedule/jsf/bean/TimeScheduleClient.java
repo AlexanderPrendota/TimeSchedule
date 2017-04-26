@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,21 +16,16 @@ import java.util.List;
 @Data
 @SessionScoped
 @NoArgsConstructor
-@AllArgsConstructor
-@ManagedBean(name = "schedule", eager = true)
+@ManagedBean(name = "schedule")
 public class TimeScheduleClient {
 
-    private TimeScheduleService timeScheduleService = new TimeScheduleService();
+
+    public TimeScheduleService timeScheduleService = new TimeScheduleService();
     public List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
 
     public List<TimeSchedule> getTimeSchedules(){
         return timeSchedules;
     }
 
-}
 
-//<ui:remove>
-//<f:metadata>
-//<f:event type="preRenderView" listener="#{schedule.getContent}" />
-//</f:metadata>
-//</ui:remove>
+}
