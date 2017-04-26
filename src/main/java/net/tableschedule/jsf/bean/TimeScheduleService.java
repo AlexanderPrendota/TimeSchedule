@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
+import static net.tableschedule.jsf.bean.MQListener.UPDATE_FLAG;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +39,7 @@ public class TimeScheduleService  {
         } catch (Exception connectionException) {
             System.out.println("Connection refused");
         }
+        UPDATE_FLAG = false;
         return timeSchedules;
     }
 

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -19,7 +20,7 @@ import static net.tableschedule.jsf.bean.MQListener.UPDATE_FLAG;
  */
 
 @Data
-@SessionScoped
+@RequestScoped
 @NoArgsConstructor
 @ManagedBean(name = "schedule")
 public class TimeScheduleClient {
@@ -31,14 +32,14 @@ public class TimeScheduleClient {
         return timeSchedules;
     }
 
-    public void initial() throws IOException{
-        System.out.println("in initial");
-        if(UPDATE_FLAG) {
-            UPDATE_FLAG = false;
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            ec.redirect(ec.getRequestContextPath() + "/home.xhtml");
-            System.out.println("UPDATE");
-        }
-    }
+//    public void initial() throws IOException{
+//        System.out.println("in initial");
+//        if(UPDATE_FLAG) {
+//            UPDATE_FLAG = false;
+//            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+//            ec.redirect(ec.getRequestContextPath() + "/home.xhtml");
+//            System.out.println("UPDATE");
+//        }
+//    }
 
 }

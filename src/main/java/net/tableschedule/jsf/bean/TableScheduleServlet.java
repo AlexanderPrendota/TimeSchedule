@@ -1,9 +1,7 @@
 package net.tableschedule.jsf.bean;
 
-import com.rabbitmq.client.*;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,20 +48,3 @@ public class TableScheduleServlet extends HttpServlet{
         resp.getWriter().flush();
     }
 }
-
-//                     TimeScheduleService timeScheduleService = new TimeScheduleService();
-//                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
-//                     TodaysTimeScheduleSingleton.getInstance().update(timeSchedules);
-
-// 1 way:
-// ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-// ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-
-// 2 way:
-//Ajax.update(":maintable");
-
-
-
-// another way
-//String page = "home.xhtml";
-//FacesContext.getCurrentInstance().getExternalContext().redirect(page);
