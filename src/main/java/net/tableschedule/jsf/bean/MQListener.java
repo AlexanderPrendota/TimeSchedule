@@ -1,15 +1,14 @@
 package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
-
 import lombok.NoArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by aleksandrprendota on 21.04.17.
@@ -18,6 +17,7 @@ import java.util.List;
 public class MQListener extends HttpServlet{
 
     private final static String QUEUE_NAME = "mylittlequeue";
+    public static boolean UPDATE_FLAG = false;
 
 
     public void startListener() throws Exception {
@@ -36,7 +36,7 @@ public class MQListener extends HttpServlet{
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] Received '" + message + "'");
                 if (message.contains("update")){
-
+                    UPDATE_FLAG = true;
                     System.out.println("DONE MQ");
                 }
             }
@@ -55,7 +55,6 @@ public class MQListener extends HttpServlet{
     }
 
 }
-
 
 //                     TimeScheduleService timeScheduleService = new TimeScheduleService();
 //                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
