@@ -36,30 +36,7 @@ public class MQListener extends HttpServlet{
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] Received '" + message + "'");
                 if (message.contains("update")){
-//                     TimeScheduleService timeScheduleService = new TimeScheduleService();
-//                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
-//                     TodaysTimeScheduleSingleton.getInstance().update(timeSchedules);
 
-                    // 1 way:
-                    // ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                    // ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-
-                    // 2 way:
-                    //Ajax.update(":maintable");
-
-//                       <servlet>
-//        <servlet-name>MQListener</servlet-name>
-//        <servlet-class>net.tableschedule.jsf.bean.MQListener</servlet-class>
-//    </servlet>
-//
-//    <servlet-mapping>
-//        <servlet-name>MQListener</servlet-name>
-//        <url-pattern>/</url-pattern>
-//    </servlet-mapping>
-
-                            // another way
-                    //String page = "home.xhtml";
-                    //FacesContext.getCurrentInstance().getExternalContext().redirect(page);
                     System.out.println("DONE MQ");
                 }
             }
@@ -78,3 +55,21 @@ public class MQListener extends HttpServlet{
     }
 
 }
+
+
+//                     TimeScheduleService timeScheduleService = new TimeScheduleService();
+//                     List<TimeSchedule> timeSchedules = timeScheduleService.getContent();
+//                     TodaysTimeScheduleSingleton.getInstance().update(timeSchedules);
+
+// 1 way:
+// ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+// ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+
+// 2 way:
+//Ajax.update(":maintable");
+
+
+
+// another way
+//String page = "home.xhtml";
+//FacesContext.getCurrentInstance().getExternalContext().redirect(page);
