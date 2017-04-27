@@ -2,9 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Shedule</title>
 
@@ -16,7 +14,6 @@
         <h:outputScript name="js/updateTime.js"/>
         <h:outputScript>
             $( document ).ready(function() {
-
                 setInterval(function(){
                     $.ajax({
                         type: "GET",

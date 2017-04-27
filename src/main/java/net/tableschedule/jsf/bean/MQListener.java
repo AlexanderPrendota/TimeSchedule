@@ -1,7 +1,6 @@
 package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
-
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -9,9 +8,10 @@ import java.util.concurrent.TimeoutException;
  * Created by aleksandrprendota on 26.04.17.
  */
 public class MQListener {
-    private final static String QUEUE_NAME = "mylittlequeue";
+
     public static volatile boolean UPDATE_FLAG = false;
     private Channel channel;
+    private final static String QUEUE_NAME = "mylittlequeue";
 
     public void startListener() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -30,7 +30,6 @@ public class MQListener {
                 System.out.println(" [x] Received '" + message + "'");
                 if (message.contains("update")){
                     UPDATE_FLAG = true;
-                    System.out.println("DONE MQ");
                 }
             }
         };

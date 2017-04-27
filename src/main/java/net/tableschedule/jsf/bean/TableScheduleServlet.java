@@ -38,7 +38,6 @@ public class TableScheduleServlet extends HttpServlet{
         } catch (Exception e) {
             LOG.error(e,e);
         }
-
         super.destroy();
     }
 
