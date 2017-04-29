@@ -1,6 +1,7 @@
 package net.tableschedule.jsf.bean;
 
 import com.rabbitmq.client.*;
+import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -12,15 +13,21 @@ public class MQListener {
     public static volatile boolean UPDATE_FLAG = false;
     private Channel channel;
     private final static String QUEUE_NAME = "mylittlequeue";
+    private static final Logger LOG = Logger.getLogger(MQListener.class);
 
-    public void startListener() throws Exception {
+
+    public void startListener() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        channel = connection.createChannel();
-
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        Connection connection;
+        try {
+            connection = factory.newConnection();
+            channel = connection.createChannel();
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        } catch (Exception e) {
+            LOG.error("Connection refused with MQ-server");
+        }
 
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -33,10 +40,19 @@ public class MQListener {
                 }
             }
         };
-        channel.basicConsume(QUEUE_NAME, true, consumer);
+        try {
+            channel.basicConsume(QUEUE_NAME, true, consumer);
+        } catch (Exception e) {
+            LOG.error("Connection refused with MQ-server");
+        }
     }
 
     public void close() throws IOException, TimeoutException {
-        channel.close();
+        try{
+            channel.close();
+        } catch (Exception e){
+            LOG.error("Error with closing MQ");
+        }
+
     }
 }

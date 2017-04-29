@@ -5,8 +5,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import lombok.NoArgsConstructor;
-
-
+import org.apache.log4j.Logger;
 import javax.ws.rs.core.MediaType;
 import static net.tableschedule.jsf.bean.MQListener.UPDATE_FLAG;
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import java.util.List;
 public class TimeScheduleService  {
 
     public List<TimeSchedule> timeSchedules = new ArrayList<TimeSchedule>();
+    private static final Logger LOG = Logger.getLogger(TimeScheduleService.class);
 
     @SuppressWarnings({"unchecked", "unused"})
     public List<TimeSchedule> getContent(){
@@ -37,7 +37,7 @@ public class TimeScheduleService  {
             String output = response.getEntity(String.class);
             timeSchedules = mapper.readValue(output, List.class);
         } catch (Exception connectionException) {
-            System.out.println("Connection refused");
+            LOG.error("Connection refused in server with data");
         }
         UPDATE_FLAG = false;
         return timeSchedules;

@@ -2,21 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Shedule</title>
 
         <h:outputStylesheet library="css" name="style.css"/>
-        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
-        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'/>
-        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
+        <h:outputStylesheet href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
+        <h:outputStylesheet href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'/>
+        <h:outputStylesheet href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
         <h:outputScript name="js/jquery-1.8.3.min.js"/>
         <h:outputScript name="js/updateTime.js"/>
         <h:outputScript>
             $( document ).ready(function() {
-
                 setInterval(function(){
                     $.ajax({
                         type: "GET",
@@ -43,7 +40,6 @@
         <h1><a href="http://localhost:8080/">Justrailways</a></h1>
         <h3>Time Table</h3>
         <h4 id="date"></h4>
-
         <b:dataTable id="schedules" value="#{schedule.timeSchedules}" var="time">
             <b:dataTableColumn value="#{time.train}" />
             <b:dataTableColumn value="#{time.stationDeparture}" />
