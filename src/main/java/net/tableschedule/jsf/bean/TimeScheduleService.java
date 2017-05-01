@@ -21,11 +21,19 @@ public class TimeScheduleService  {
     private static final Logger LOG = Logger.getLogger(TimeScheduleService.class);
 
     @SuppressWarnings({"unchecked", "unused"})
-    public List<TimeSchedule> getContent(){
+    public List<TimeSchedule> getContent(String station){
+
+        String url;
+
+        if (station == null){
+            url = "http://localhost:8080/schedule/todays";
+        } else {
+            url = "http://localhost:8080/schedule/timeschedule/station/" + station;
+        }
 
         Client client = Client.create();
         try {
-            WebResource webResource = client.resource("http://localhost:8080/schedule/todays");
+            WebResource webResource = client.resource(url);
             ObjectMapper mapper = new ObjectMapper();
             ClientResponse response = webResource
                     .accept(MediaType.APPLICATION_JSON)
