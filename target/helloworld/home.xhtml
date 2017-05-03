@@ -2,11 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Shedule</title>
-
-        <h:outputStylesheet href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet'/>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
         <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'/>
         <h:outputStylesheet href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet'/>
@@ -24,7 +25,7 @@
                             console.log("response:");
                             console.log(response);
                             if("true".localeCompare(response) == 0){
-                                location.reload();
+                            location.reload();
                             }
                         },
                         error: function () {
@@ -37,9 +38,20 @@
 
     </h:head>
     <h:body id="maintable">
-        <h1><a href="http://localhost:8080/">Justrailways</a></h1>
-        <h2>Time Table</h2>
-        <h3>#{schedule.station}</h3>
+        <b:navBar id="navbar" brand="Time Table" brandHref="/helloworld" inverse="false">
+            <b:navbarLinks>
+                <b:navLink value="Home" href="/helloworld"/>
+                <b:navLink value="Justrailways" href="http://localhost:8080/"/>
+                <b:dropMenu id="dropMenu" value="City">
+                    <b:navLink value="Main" href="/helloworld"/>
+                    <ui:repeat var="city" value="#{schedule.cities}">
+                        <b:navLink value="#{city}" href="/helloworld/?station=#{city}"/>
+                    </ui:repeat>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </b:navBar>
+        <h1>Justrailways</h1>
+        <h2>#{schedule.station}</h2>
         <div id="date"></div>
         <b:dataTable id="schedules" value="#{schedule.timeSchedules}" var="time">
             <b:dataTableColumn value="#{time.train}" />

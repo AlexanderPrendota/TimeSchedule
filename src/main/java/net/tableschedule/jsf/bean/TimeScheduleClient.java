@@ -2,12 +2,14 @@ package net.tableschedule.jsf.bean;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.tableschedule.jsf.bean.service.TimeScheduleService;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class TimeScheduleClient {
     @ManagedProperty(value = "#{param.station}")
     private String station;
 
+    public String city;
+    public List<String> cities = new ArrayList<String>();
     public TimeScheduleService timeScheduleService = new TimeScheduleService();
     public List<TimeSchedule> timeSchedules;
     private static final Logger LOG = Logger.getLogger(TimeScheduleClient.class);
@@ -35,6 +39,7 @@ public class TimeScheduleClient {
             LOG.info("Station = " + station);
         }
         timeSchedules = timeScheduleService.getContent(station);
+        cities = timeScheduleService.getCities();
     }
 
     public List<TimeSchedule> getTimeSchedules(){
@@ -47,5 +52,9 @@ public class TimeScheduleClient {
         } else{
             return station;
         }
+    }
+
+    public List<String> getCities(){
+        return cities;
     }
 }
