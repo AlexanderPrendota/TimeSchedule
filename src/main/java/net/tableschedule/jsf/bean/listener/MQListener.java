@@ -3,12 +3,8 @@ package net.tableschedule.jsf.bean.listener;
 import com.rabbitmq.client.*;
 import net.tableschedule.jsf.bean.cache.CacheCities;
 import net.tableschedule.jsf.bean.cache.CacheTimeSchedules;
-import net.tableschedule.jsf.bean.communication.DataSourceService;
-import net.tableschedule.jsf.bean.communication.DataSourceServiceImp;
 import net.tableschedule.jsf.bean.loader.Loader;
 import org.apache.log4j.Logger;
-
-import javax.ejb.EJB;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -18,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 public class MQListener {
 
     public static volatile boolean UPDATE_FLAG = false;
+    public static volatile boolean RIGISTER_FLAG = true;
     private Channel channel;
     private Loader loader;
     private final static String QUEUE_NAME = "mylittlequeue";
@@ -28,6 +25,7 @@ public class MQListener {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection;
+        RIGISTER_FLAG = false;
         loader = new Loader();
         try {
             connection = factory.newConnection();
@@ -35,7 +33,10 @@ public class MQListener {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         } catch (Exception e) {
+            RIGISTER_FLAG = true;
             LOG.error("Connection refused with MQ-server");
+            System.out.println(RIGISTER_FLAG);
+
         }
 
         Consumer consumer = new DefaultConsumer(channel) {
@@ -62,6 +63,7 @@ public class MQListener {
         try{
             channel.close();
         } catch (Exception e){
+            RIGISTER_FLAG = true;
             LOG.error("Error with closing MQ");
         }
 

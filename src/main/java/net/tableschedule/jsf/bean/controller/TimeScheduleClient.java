@@ -5,15 +5,11 @@ import lombok.NoArgsConstructor;
 import net.tableschedule.jsf.bean.model.TimeSchedule;
 import net.tableschedule.jsf.bean.service.ServiceSchedule;
 import net.tableschedule.jsf.bean.service.TimeScheduleServiceImp;
-import org.apache.log4j.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.tableschedule.jsf.bean.listener.MQListener.UPDATE_FLAG;
