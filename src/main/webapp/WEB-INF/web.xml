@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>MQListener</servlet-name>
-        <servlet-class>net.tableschedule.jsf.bean.TableScheduleServlet</servlet-class>
+        <servlet-class>net.tableschedule.jsf.bean.listener.TableScheduleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
