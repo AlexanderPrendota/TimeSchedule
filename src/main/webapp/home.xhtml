@@ -45,7 +45,7 @@
                 <b:dropMenu id="dropMenu" value="City">
                     <b:navLink value="Main" href="/helloworld"/>
                     <ui:repeat var="city" value="#{schedule.cities}">
-                        <b:navLink value="#{city}" href="/helloworld/?git merge hotfix=#{city}"/>
+                        <b:navLink value="#{city}" href="/helloworld/?station=#{city}"/>
                     </ui:repeat>
                 </b:dropMenu>
             </b:navbarLinks>

@@ -22,29 +22,9 @@ public class TimeScheduleServiceImp implements ServiceSchedule {
 
     public static final String JNDI = "serviceBean";
     private static final Logger LOG = Logger.getLogger(TimeScheduleServiceImp.class);
-    private MQListener mqListener;
 
     @EJB(beanName = DataSourceServiceImp.JNDI)
     private DataSourceService dataSourceService;
-
-//    @PostConstruct
-//    public void init(){
-//        mqListener = new MQListener();
-//        try{
-//            mqListener.startListener();
-//        }catch (Exception e){
-//            LOG.error(e,e);
-//        }
-//    }
-//
-//    @PreDestroy
-//    public void destroy(){
-//        try {
-//            mqListener.close();
-//        } catch (Exception e) {
-//            LOG.error(e,e);
-//        }
-//    }
 
     @Override
     public List<TimeSchedule> getContent(){

@@ -17,11 +17,10 @@ public class DataSourceServiceImp implements DataSourceService {
 
 
     public static final String JNDI = "datasourceServiceBean";
-    private Loader loader;
+    private Loader loader = new Loader();
 
     @Override
     public List<String> getCitiesList() {
-        loader = new Loader();
         List<String> cities = CacheCities.getInstance().getCache();
         if (cities.size() == 0) {
             cities = loader.getCitiesFromServer();
@@ -32,7 +31,6 @@ public class DataSourceServiceImp implements DataSourceService {
     @Override
     @SuppressWarnings({"unchecked", "unused"})
     public List<TimeSchedule> getTimeScheduleList() {
-        loader = new Loader();
         List<TimeSchedule> timeSchedules = CacheTimeSchedules.getInstance().getCache();
         if (timeSchedules.size() == 0) {
             timeSchedules = loader.getTimeScheduleFromServer();
@@ -41,6 +39,7 @@ public class DataSourceServiceImp implements DataSourceService {
     }
 }
 
+//TODO Инициализация кэша
 
 
 

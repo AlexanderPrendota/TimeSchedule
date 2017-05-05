@@ -19,7 +19,7 @@ public class MQListener {
     private Loader loader;
     private final static String QUEUE_NAME = "mylittlequeue";
     private static final Logger LOG = Logger.getLogger(MQListener.class);
-
+//TODO АДресация статиков
 
     public void startListener() {
         ConnectionFactory factory = new ConnectionFactory();
@@ -55,11 +55,12 @@ public class MQListener {
         try {
             channel.basicConsume(QUEUE_NAME, true, consumer);
         } catch (Exception e) {
+            RIGISTER_FLAG = true;
             LOG.error("Connection refused with MQ-server in channel.basicConsume");
         }
     }
 
-    public void close() throws IOException, TimeoutException {
+    public void close(){
         try{
             channel.close();
         } catch (Exception e){
