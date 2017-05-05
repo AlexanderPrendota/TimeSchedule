@@ -2,17 +2,12 @@ package net.tableschedule.jsf.bean.loader;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.ArrayType;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import net.tableschedule.jsf.bean.cache.CacheCities;
-import net.tableschedule.jsf.bean.cache.CacheTimeSchedules;
 import net.tableschedule.jsf.bean.model.TimeSchedule;
 import org.apache.log4j.Logger;
-
 import javax.ws.rs.core.MediaType;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -27,8 +22,6 @@ import static net.tableschedule.jsf.bean.listener.MQListener.UPDATE_FLAG;
 public class Loader {
 
     private static final Logger LOG = Logger.getLogger(Loader.class);
-
-
 
     @SuppressWarnings({"unchecked", "unused"})
     public List<TimeSchedule> getTimeScheduleFromServer(){
@@ -48,7 +41,6 @@ public class Loader {
             }
             String output = response.getEntity(String.class);
             timeSchedules = mapper.readValue(output,new TypeReference<List<TimeSchedule>>(){});
-            CacheTimeSchedules.getInstance().updateCache(timeSchedules);
         } catch (Exception connectionException) {
             LOG.error("Connection refused in server with data");
         }
@@ -74,7 +66,6 @@ public class Loader {
                 }
                 String output = response.getEntity(String.class);
                 cities = mapper.readValue(output, List.class);
-                CacheCities.getInstance().updateCache(cities);
             } catch (Exception connectionException) {
                 LOG.error("Connection refused in server with city data");
             }

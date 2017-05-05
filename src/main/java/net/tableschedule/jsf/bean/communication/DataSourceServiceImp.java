@@ -24,6 +24,7 @@ public class DataSourceServiceImp implements DataSourceService {
         List<String> cities = CacheCities.getInstance().getCache();
         if (cities.size() == 0) {
             cities = loader.getCitiesFromServer();
+            CacheCities.getInstance().updateCache(cities);
         }
         return cities;
     }
@@ -34,12 +35,11 @@ public class DataSourceServiceImp implements DataSourceService {
         List<TimeSchedule> timeSchedules = CacheTimeSchedules.getInstance().getCache();
         if (timeSchedules.size() == 0) {
             timeSchedules = loader.getTimeScheduleFromServer();
+            CacheTimeSchedules.getInstance().updateCache(timeSchedules);
         }
         return timeSchedules;
     }
 }
-
-//TODO Инициализация кэша
 
 
 
