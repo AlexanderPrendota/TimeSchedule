@@ -6,13 +6,11 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import net.tableschedule.jsf.bean.model.TimeSchedule;
+import net.tableschedule.jsf.bean.utils.UnitFunctions;
 import org.apache.log4j.Logger;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import static net.tableschedule.jsf.bean.listener.MQListener.UPDATE_FLAG;
 
@@ -30,7 +28,7 @@ public class Loader {
 
         Client client = Client.create();
         try {
-            WebResource webResource = client.resource(getProperty("schedules"));
+            WebResource webResource = client.resource(UnitFunctions.getProperty("schedules"));
             ObjectMapper mapper = new ObjectMapper();
             ClientResponse response = webResource
                     .accept(MediaType.APPLICATION_JSON)
@@ -55,7 +53,7 @@ public class Loader {
         if (cities.size() == 0){
             Client client = Client.create();
             try {
-                WebResource webResource = client.resource(getProperty("cities"));
+                WebResource webResource = client.resource(UnitFunctions.getProperty("cities"));
                 ObjectMapper mapper = new ObjectMapper();
                 ClientResponse response = webResource
                         .accept(MediaType.APPLICATION_JSON)
@@ -73,21 +71,4 @@ public class Loader {
         return cities;
     }
 
-    private String getProperty(String name){
-
-        Properties prop = new Properties();
-        InputStream input;
-        String filename = "application.properties";
-        input = Loader.class.getClassLoader().getResourceAsStream(filename);
-        if(input == null){
-            LOG.error("Sorry, unable to find " + filename);
-        }
-        try {
-            prop.load(input);
-        } catch (IOException e) {
-            LOG.error("Error with parsing application property");
-        }
-        return prop.getProperty(name);
-
-    }
 }

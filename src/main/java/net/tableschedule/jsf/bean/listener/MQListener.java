@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 import net.tableschedule.jsf.bean.cache.CacheCities;
 import net.tableschedule.jsf.bean.cache.CacheTimeSchedules;
 import net.tableschedule.jsf.bean.loader.Loader;
+import net.tableschedule.jsf.bean.utils.UnitFunctions;
 import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -17,13 +18,13 @@ public class MQListener {
     public static volatile boolean RIGISTER_FLAG = true;
     private Channel channel;
     private Loader loader;
-    private final static String QUEUE_NAME = "mylittlequeue";
+    private final static String QUEUE_NAME = UnitFunctions.getProperty("queue_name");
     private static final Logger LOG = Logger.getLogger(MQListener.class);
 //TODO АДресация статиков
 
     public void startListener() {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost(UnitFunctions.getProperty("host_for_queue"));
         Connection connection;
         RIGISTER_FLAG = false;
         loader = new Loader();
