@@ -18,15 +18,14 @@ public class MQListener {
     public static volatile boolean RIGISTER_FLAG = true;
     private Channel channel;
     private Loader loader;
-    private final static String QUEUE_NAME = UnitFunctions.getProperty("queue_name");
+    private static final String QUEUE_NAME = UnitFunctions.getProperty("queue_name");
     private static final Logger LOG = Logger.getLogger(MQListener.class);
-//TODO АДресация статиков
 
     public void startListener() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(UnitFunctions.getProperty("host_for_queue"));
         Connection connection;
-        RIGISTER_FLAG = false;
+        MQListener.RIGISTER_FLAG = false;
         loader = new Loader();
         try {
             connection = factory.newConnection();
@@ -34,9 +33,8 @@ public class MQListener {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         } catch (Exception e) {
-            RIGISTER_FLAG = true;
+            MQListener.RIGISTER_FLAG = true;
             LOG.error("Connection refused with MQ-server");
-            System.out.println(RIGISTER_FLAG);
 
         }
 
@@ -49,14 +47,14 @@ public class MQListener {
                 if (message.contains("update")){
                     CacheCities.getInstance().updateCache(loader.getCitiesFromServer());
                     CacheTimeSchedules.getInstance().updateCache(loader.getTimeScheduleFromServer());
-                    UPDATE_FLAG = true;
+                    MQListener.UPDATE_FLAG = true;
                 }
             }
         };
         try {
             channel.basicConsume(QUEUE_NAME, true, consumer);
         } catch (Exception e) {
-            RIGISTER_FLAG = true;
+            MQListener.RIGISTER_FLAG = true;
             LOG.error("Connection refused with MQ-server in channel.basicConsume");
         }
     }
@@ -65,7 +63,7 @@ public class MQListener {
         try{
             channel.close();
         } catch (Exception e){
-            RIGISTER_FLAG = true;
+            MQListener.RIGISTER_FLAG = true;
             LOG.error("Error with closing MQ");
         }
 

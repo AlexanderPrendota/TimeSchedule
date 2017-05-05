@@ -2,6 +2,7 @@ package net.tableschedule.jsf.bean.controller;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.tableschedule.jsf.bean.listener.MQListener;
 import net.tableschedule.jsf.bean.model.TimeSchedule;
 import net.tableschedule.jsf.bean.service.ServiceSchedule;
 import net.tableschedule.jsf.bean.service.TimeScheduleServiceImp;
@@ -11,8 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import java.util.List;
-
-import static net.tableschedule.jsf.bean.listener.MQListener.UPDATE_FLAG;
 
 /**
  * Created by aleksandrprendota on 18.04.17.
@@ -41,7 +40,7 @@ public class TimeScheduleClient {
             timeSchedules = serviceSchedule.getListOfTimeScheduleByStationDepartureSorted(station);
         }
         cities = serviceSchedule.getCities();
-        UPDATE_FLAG=false;
+        MQListener.UPDATE_FLAG=false;
     }
 
     public List<TimeSchedule> getTimeSchedules(){

@@ -21,7 +21,6 @@ import java.util.List;
 public class TimeScheduleServiceImp implements ServiceSchedule {
 
     public static final String JNDI = "serviceBean";
-    private static final Logger LOG = Logger.getLogger(TimeScheduleServiceImp.class);
 
     @EJB(beanName = DataSourceServiceImp.JNDI)
     private DataSourceService dataSourceService;

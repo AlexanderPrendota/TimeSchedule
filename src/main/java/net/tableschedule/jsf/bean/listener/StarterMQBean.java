@@ -2,12 +2,9 @@ package net.tableschedule.jsf.bean.listener;
 
 
 import org.apache.log4j.Logger;
-
 import javax.annotation.PreDestroy;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-
-import static net.tableschedule.jsf.bean.listener.MQListener.RIGISTER_FLAG;
 
 /**
  * Created by aleksandrprendota on 04.05.17.
@@ -27,7 +24,7 @@ public class StarterMQBean {
     @Schedule(second= "*/30", minute = "*", hour = "*", persistent = false)
     public void registrationMQ(){
         LOG.info("[*] Checking starting MQ....");
-        if (RIGISTER_FLAG){
+        if (MQListener.RIGISTER_FLAG){
             try {
                 mqListener.startListener();
             } catch (Exception e){
