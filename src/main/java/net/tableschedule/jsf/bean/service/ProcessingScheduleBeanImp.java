@@ -40,6 +40,7 @@ public class ProcessingScheduleBeanImp  implements ProcessingScheduleBean{
             for (TimeSchedule remove : removeList) {
                 schedules.remove(remove);
             }
+            MQListener.UPDATE_FLAG = true;
         }
     }
 }
